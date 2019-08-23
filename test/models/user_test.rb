@@ -5,7 +5,9 @@ class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(full_name: "山田 太郎",
                      user_name: "Example User",
-                         email: "user@example.com")
+                         email: "user@example.com",
+                      password: "foobar",
+         password_confirmation: "foobar")
   end
 
   # 有効なユーザーである
@@ -83,6 +85,18 @@ class UserTest < ActiveSupport::TestCase
     @user.email = mixed_case_email
     @user.save
     assert_equal mixed_case_email.downcase, @user.reload.email
+  end
+  
+  # 空ではないパスワードが設定されていること
+  test "password should be present (nonblank)" do
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
+
+  # パスワードは最低6文字以上であること
+  test "password should have a minimum length" do
+    @user.password = @user.password_confirmation = "a" * 5
+    assert_not @user.valid?
   end
 
 end
