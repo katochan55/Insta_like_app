@@ -14,12 +14,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", "登録・#{@base_title1}"
   end
   
-  test "should get login" do
-    get login_url
-    assert_response :success
-    assert_select "title", "ログイン・#{@base_title1}"
-  end
-  
   test "should get show" do
     get user_path(@user)
     assert_response :success
