@@ -17,17 +17,26 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert flash.empty?
   end
   
-  # 有効なユーザーでログイン
-  test "login with valid information" do
+  # 有効なユーザーでログイン〜ログアウト
+  test "login with valid information followed by logout" do
     get login_path
     post login_path, params: { session: { email:    @user.email,
                                           password: 'password' } }
+    assert is_logged_in?
     assert_redirected_to @user
     follow_redirect!
     assert_template 'users/show'
     #assert_select "a[href=?]", '#' -> indexページへのリンク
-    #assert_select "a[href=?]", user_path(@user)
+    assert_select "a[href=?]", user_path(@user)
     #assert_select "a[href=?]", 通知一覧 後ほど追加
+    assert_select "a[href=?]", logout_path
+    delete logout_path
+    assert_not is_logged_in?
+    assert_redirected_to root_url
+    follow_redirect!
+    assert_select "a[href=?]", login_path
+    assert_select "a[href=?]", logout_path,      count: 0
+    assert_select "a[href=?]", user_path(@user), count: 0
   end
   
 end
