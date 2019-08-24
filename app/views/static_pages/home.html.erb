@@ -3,11 +3,25 @@
   <p>友達の写真や動画をチェックしよう</p>
   <a href="#">Facebookでログイン</a>
   または
-  <input type="email" placeholder="メールアドレス">
-  <input type="text" placeholder="フルネーム">
-  <input type="text" placeholder="ユーザーネーム">
-  <input type="password" placeholder="パスワード">
-  <button type="button" name="name" value="value">登録する</button>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@user, url: signup_path) do |f| %>
+        <%= render 'shared/error_messages' %>
+  
+        <%= f.email_field :email, placeholder: "メールアドレス", class: 'form-control' %>
+        
+        <%= f.text_field :full_name, placeholder: "フルネーム", class: 'form-control' %>
+
+        <%= f.text_field :user_name, placeholder: "ユーザーネーム", class: 'form-control' %>
+  
+        <%= f.password_field :password, placeholder: "パスワード", class: 'form-control' %>
+  
+        <%= f.password_field :password_confirmation, placeholder: "パスワード(確認用)", class: 'form-control' %>
+  
+        <%= f.submit "登録する", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
   <br>
   登録することで、Facebookの<%= link_to "利用規約", use_of_terms_path %>、データに関するポリシー、Cookieポリシーに同意するものとします。
   <br>

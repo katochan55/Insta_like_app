@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   # Usersコントローラのルーティング
   get  '/login', to: 'users#login'
   get '/signup', to: 'users#new' # ユーザー登録ページ
-  
+  post '/signup',  to: 'users#create' # ユーザー登録時のフォーム送信
+  resources :users
 end

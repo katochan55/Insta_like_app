@@ -3,7 +3,7 @@ require 'test_helper'
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   
   def setup
-    @base_title = "Instagram clone"
+    @base_title = "Instagram"
   end
   
   test "should get root" do
@@ -15,7 +15,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get terms" do
     get use_of_terms_url
     assert_response :success
-    assert_select "title", "利用規約 | #{@base_title}"
+    assert_select "title", "利用規約・#{@base_title}"
   end
 
 end
