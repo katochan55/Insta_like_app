@@ -2,7 +2,8 @@ User.create!(full_name:  "Example User",
              user_name:  "E.U.",
              email: "example@railstutorial.org",
              password:              "foobar",
-             password_confirmation: "foobar")
+             password_confirmation: "foobar",
+             admin: true)
 
 99.times do |n|
   full_name  = Faker::Name.name
