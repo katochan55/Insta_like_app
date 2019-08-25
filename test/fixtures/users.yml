@@ -3,3 +3,8 @@ taro:
   user_name: taro
   email:     tarotaro@gmail.com
   password_digest: <%= User.digest('password') %>
+
+jiro:
+  full_name: 山田 次郎
+  email: jirojiro@gmail.com
+  password_digest: <%= User.digest('password') %>
