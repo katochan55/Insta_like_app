@@ -9,3 +9,23 @@ jiro:
   user_name: jiro
   email:     jirojiro@gmail.com
   password_digest: <%= User.digest('password') %>
+
+saburo:
+  full_name: 山田 三郎
+  user_name: 三郎
+  email:     saburosaburo@gmail.com
+  password_digest: <%= User.digest('password') %>
+  
+malory:
+  full_name: 山田 四郎
+  user_name: siro
+  email:     sirosiro@gmail.com
+  password_digest: <%= User.digest('password') %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  full_name:  <%= "User #{n}" %>
+  user_name:  <%= "User #{n+1000}" %>
+  email: <%= "user-#{n}@example.com" %>
+  password_digest: <%= User.digest('password') %>
+<% end %>
