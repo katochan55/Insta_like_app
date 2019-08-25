@@ -13,7 +13,7 @@ jiro:
 
 saburo:
   full_name: 山田 三郎
-  user_name: 三郎
+  user_name: saburo
   email:     saburosaburo@gmail.com
   password_digest: <%= User.digest('password') %>
   
