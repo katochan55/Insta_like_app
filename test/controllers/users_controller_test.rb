@@ -9,6 +9,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @other_user = users(:jiro)
   end
   
+  # indexアクションはログインしていない時にリダイレクトされるべき(before_action :logged_in_userに対するテスト)
+  test "should redirect index when not logged in" do
+    get users_path
+    assert_redirected_to login_url
+  end
+  
   test "should get new" do
     get signup_path
     assert_response :success

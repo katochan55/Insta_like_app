@@ -6,5 +6,6 @@ taro:
 
 jiro:
   full_name: 山田 次郎
-  email: jirojiro@gmail.com
+  user_name: jiro
+  email:     jirojiro@gmail.com
   password_digest: <%= User.digest('password') %>
