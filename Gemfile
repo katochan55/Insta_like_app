@@ -36,6 +36,7 @@ end
 
 group :production do
   gem 'pg', '0.20.0'
+  gem 'rails-controller-testing', '1.0.2'
 end
 
 # Windows環境ではtzinfo-dataというgemを含める必要があります
