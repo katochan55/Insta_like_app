@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   
+  # PasswordResetsコントローラのルーティング
+  resources :password_resets, only: [:edit, :update]
+  
 end

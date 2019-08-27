@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     if @user.save
       # Success
       log_in @user
-      flash[:success] = "Welcome to the Instagram!"
+      flash[:success] = "Instagramへようこそ!"
       redirect_to @user
     else
       # Failure
