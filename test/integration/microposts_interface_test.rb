@@ -6,24 +6,11 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     @user = users(:taro)
   end
 
-  # マイクロポストのUI
-  test "micropost interface" do
+  # ログイン後のトップページのUI
+  test "micropost interface at root_path" do
     log_in_as(@user)
     get root_path
     assert_select 'div.pagination'
-    # 無効な送信
-    assert_no_difference 'Micropost.count' do
-      post microposts_path, params: { micropost: { content: "" } }
-    end
-    assert_select 'div#error_explanation'
-    # 有効な送信
-    content = "This micropost really ties the room together"
-    assert_difference 'Micropost.count', 1 do
-      post microposts_path, params: { micropost: { content: content } }
-    end
-    assert_redirected_to root_url
-    follow_redirect!
-    assert_match content, response.body
     # 投稿を削除する
     assert_select 'a', text: '削除'
     first_micropost = @user.microposts.paginate(page: 1).first
@@ -48,6 +35,30 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     other_user.microposts.create!(content: "A micropost")
     get root_path
     assert_match "1 micropost", response.body
+  end
+  
+  # マイクロポスト投稿ページのUI
+  test "micropost interface at new_micropost_path" do
+    log_in_as(@user)
+    get new_micropost_path
+    assert_select 'input[type=file]'
+    # 無効な送信
+    assert_no_difference 'Micropost.count' do
+      post microposts_path, params: { micropost: { content: "" } }
+    end
+    assert_select 'div#error_explanation'
+    # 有効な送信
+    content = "This micropost really ties the room together"
+    picture = fixture_file_upload('test/fixtures/rails.png', 'image/png')
+    assert_difference 'Micropost.count', 1 do
+      post microposts_path, params: { micropost:
+                                      { content: content,
+                                        picture: picture } }
+    end
+    assert assigns(:micropost).picture? # 投稿成功後にassignsメソッドでインスタンス変数@micropostにアクセス
+    assert_redirected_to root_url
+    follow_redirect!
+    assert_match content, response.body
   end
   
 end
