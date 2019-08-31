@@ -3,11 +3,13 @@ class PictureUploader < CarrierWave::Uploader::Base
   # 600 * 600の正方形に整形
   process resize_and_pad(600, 600, background = :transparent, gravity = 'Center')
   
-  if Rails.env.production?
-    storage :fog
-  else
-    storage :file
-  end
+  # if Rails.env.production?
+  #   storage :fog
+  # else
+  #   storage :file
+  # end
+  
+  storage :file
   
   # アップロードファイルの保存先ディレクトリは上書き可能
   # 下記はデフォルトの保存先  
