@@ -3,8 +3,12 @@ class User < ApplicationRecord
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed # following配列の元はfollowed idの集合である
-
+  has_many :followers, through: :passive_relationships, source: :follower
+  
   attr_accessor :remember_token
   before_save :downcase_email  # 保存する直前にemail属性を小文字に変換してメールアドレスの一意性を保証する
   validates :full_name, presence: true, length: { maximum:  50 }
