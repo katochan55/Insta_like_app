@@ -1,0 +1,15 @@
+one:
+  follower: taro
+  followed: saburo
+
+two:
+  follower: taro
+  followed: siro
+
+three:
+  follower: saburo
+  followed: taro
+
+four:
+  follower: jiro
+  followed: taro
