@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  before_destroy { Micropost.unscoped.where(user_id: id).destroy_all } # Userを消すときに、micropostsも必ず消す
   attr_accessor :remember_token
   before_save :downcase_email  # 保存する直前にemail属性を小文字に変換してメールアドレスの一意性を保証する
   validates :full_name, presence: true, length: { maximum:  50 }
