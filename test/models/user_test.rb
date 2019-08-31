@@ -112,5 +112,16 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+  
+  # following関連のメソッド(follow, unfollow)
+  test "should follow and unfollow a user" do
+    taro = users(:taro)
+    jiro  = users(:jiro)
+    assert_not taro.following?(jiro)
+    taro.follow(jiro)
+    assert taro.following?(jiro)
+    taro.unfollow(jiro)
+    assert_not taro.following?(jiro)
+  end
 
 end
