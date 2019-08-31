@@ -1,6 +1,7 @@
 class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  process resize_to_limit: [600, 600]
+  # 600 * 600の正方形に整形
+  process resize_and_pad(600, 600, background = :transparent, gravity = 'Center')
   
   storage :file
 

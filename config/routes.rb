@@ -18,6 +18,6 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:edit, :update]
 
   # Micropostsコントローラのルーティング  
-  resources :microposts, only: [:new, :create, :destroy]
+  resources :microposts, only: [:show, :new, :create, :destroy]
   
 end

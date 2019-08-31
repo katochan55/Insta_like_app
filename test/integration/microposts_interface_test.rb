@@ -56,8 +56,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
                                         picture: picture } }
     end
     assert assigns(:micropost).picture? # 投稿成功後にassignsメソッドでインスタンス変数@micropostにアクセス
-    assert_redirected_to root_url
-    follow_redirect!
+    assert_template 'show'
     assert_match content, response.body
   end
   
