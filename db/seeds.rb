@@ -1,3 +1,6 @@
+User.destroy_all
+Micropost.destroy_all
+
 User.create!(full_name:  "Example User",
              user_name:  "E.U.",
              email: "example@railstutorial.org",
