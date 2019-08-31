@@ -124,5 +124,24 @@ class UserTest < ActiveSupport::TestCase
     taro.unfollow(jiro)
     assert_not taro.following?(jiro)
   end
+  
+  # フィードは正しい投稿を持つべき
+  test "feed should have the right posts" do
+    taro = users(:taro)
+    jiro  = users(:jiro)
+    saburo    = users(:saburo)
+    # フォローしているユーザーの投稿を確認
+    saburo.microposts.each do |post_following|
+      assert taro.feed.include?(post_following)
+    end
+    # 自分自身の投稿を確認
+    taro.microposts.each do |post_self|
+      assert taro.feed.include?(post_self)
+    end
+    # フォローしていないユーザーの投稿を確認
+    jiro.microposts.each do |post_unfollowed|
+      assert_not taro.feed.include?(post_unfollowed)
+    end
+  end
 
 end
