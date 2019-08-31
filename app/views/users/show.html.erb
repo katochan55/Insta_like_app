@@ -4,6 +4,13 @@
   <%= gravatar_for @user %>
   <%= @user.user_name %>
 </h1>
+
+<%= render 'follow_form' if logged_in? %>
+
+<section class="stats">
+  <%= render 'shared/stats' %>
+</section>
+
 <p><%= link_to "プロフィールを編集", edit_user_path(@user) %></p>
 <p><%= link_to "ログアウト", logout_path, method: :delete %></p>
 
