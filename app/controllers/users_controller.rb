@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  # before_action :admin_user,     only: :destroy
   
   # GET /users
   def index
@@ -53,10 +53,34 @@ class UsersController < ApplicationController
   
   # DELETE /users/:id
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "ユーザーの削除に成功しました。"
-    redirect_to users_url
+    @user = User.find(params[:id])
+    # ユーザー一覧ページの「削除」リンクがクリックされた場合
+    if request.referrer == users_url
+    # if request.original_fullpath == user_path(id: params[:id])
+      if current_user.admin?
+        @user.destroy
+        flash[:success] = "ユーザーの削除に成功しました。"
+        redirect_to users_url
+      else
+        redirect_to root_url
+      end
+    # プロフィール編集ページの「アカウントを削除する」リンクがクリックされた場合
+    elsif request.referrer == edit_user_url
+      if current_user?(@user)
+        @user.destroy
+        flash[:success] = "アカウントを削除しました。"
+        redirect_to root_url
+      end
+    else
+      redirect_to root_url
+    end
   end
+  
+  # def destroy
+  #   User.find(params[:id]).destroy
+  #   flash[:success] = "ユーザーの削除に成功しました。"
+  #   redirect_to users_url
+  # end
   
   def following
     @title1 = "フォローしているユーザー一覧"

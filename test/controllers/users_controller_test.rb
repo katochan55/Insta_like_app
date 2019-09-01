@@ -80,6 +80,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   # 管理者以外のログインしたユーザーがdestroyアクションを実行した場合、リダイレクトされるべき(before_action :admin_userに対するテスト)
   test "should redirect destroy when logged in as a non-admin" do
     log_in_as(@other_user)
+    get users_path
     assert_no_difference 'User.count' do
       delete user_path(@user)
     end
