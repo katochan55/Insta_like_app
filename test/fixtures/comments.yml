@@ -1,0 +1,9 @@
+one:
+  micropost_id: 1
+  user_id: 1
+  content: Good morning
+
+two:
+  micropost_id: 2
+  user_id: 2
+  content: Good evening

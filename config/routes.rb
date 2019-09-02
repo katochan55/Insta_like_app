@@ -27,8 +27,10 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   
   # Favoriteリソースのルーティング
-  # resources :favorites, only: [:create, :destroy]
   post   "favorites/:micropost_id/create"  => "favorites#create"
   delete "favorites/:micropost_id/destroy" => "favorites#destroy"
+  
+  # Commentリソースのルーティング
+  resources :comments, only: [:new, :create]
   
 end
