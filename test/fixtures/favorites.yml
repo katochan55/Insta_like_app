@@ -1,0 +1,15 @@
+one:
+  user_id: 1
+  micropost_id: 2
+
+two:
+  user_id: 2
+  micropost_id: 3
+  
+three:
+  user_id: 3
+  micropost_id: 4
+  
+four:
+  user_id: 1
+  micropost_id: 5

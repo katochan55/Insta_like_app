@@ -26,4 +26,9 @@ Rails.application.routes.draw do
   # Relationshipリソースのルーティング
   resources :relationships, only: [:create, :destroy]
   
+  # Favoriteリソースのルーティング
+  # resources :favorites, only: [:create, :destroy]
+  post   "favorites/:micropost_id/create"  => "favorites#create"
+  delete "favorites/:micropost_id/destroy" => "favorites#destroy"
+  
 end

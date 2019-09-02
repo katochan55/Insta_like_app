@@ -8,6 +8,7 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed # following配列の元はfollowed idの集合である
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :favorites, dependent: :destroy
   
   attr_accessor :remember_token
   before_save :downcase_email  # 保存する直前にemail属性を小文字に変換してメールアドレスの一意性を保証する
@@ -74,6 +75,21 @@ class User < ApplicationRecord
   # 現在のユーザーがフォローしてたらtrueを返す
   def following?(other_user)
     following.include?(other_user)
+  end
+  
+  # マイクロポストをお気に入りに登録する
+  def favorite(micropost)
+    Favorite.create!(user_id: self.id, micropost_id: micropost.id)
+  end
+
+  # マイクロポストをお気に入り解除する
+  def unfavorite(micropost)
+    Favorite.find_by(user_id: self.id, micropost_id: micropost.id).destroy
+  end
+
+  # 現在のユーザーがお気に入り登録してたらtrueを返す
+  def favorite?(micropost)
+    !Favorite.find_by(user_id: self.id, micropost_id: micropost.id).nil?
   end
   
   private

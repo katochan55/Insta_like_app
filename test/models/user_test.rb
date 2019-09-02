@@ -143,5 +143,16 @@ class UserTest < ActiveSupport::TestCase
       assert_not taro.feed.include?(post_unfollowed)
     end
   end
+  
+  # お気に入り登録＆解除
+  test "User should add favorite and remove favorite to a micropost" do
+    taro = users(:taro)
+    micropost  = microposts(:ants)
+    assert_not taro.favorite?(micropost)
+    taro.favorite(micropost)
+    assert taro.favorite?(micropost)
+    taro.unfavorite(micropost)
+    assert_not taro.favorite?(micropost)
+  end
 
 end

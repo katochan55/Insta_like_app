@@ -1,0 +1,5 @@
+<%= link_to "/favorites/#{@micropost.id}/create",
+            method: :post,
+            remote: true do %>
+  <span class="fa fa-heart like-btn-like"></span>
+<% end %>
