@@ -22,6 +22,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get users_path
     assert_template "users/index"
+    assert_select "a[href=?]", root_url
     assert_select "a[href=?]", user_path(@user)
     delete logout_path  # logout_pathにDELETEリクエストを送りつける
     assert_not is_logged_in?
