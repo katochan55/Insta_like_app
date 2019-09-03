@@ -11,6 +11,7 @@
     </section>
     <%= link_to "プロフィールを編集", edit_user_path(@user) %>
     <%= link_to "ログアウト", logout_path, method: :delete %>
+    <p>投稿<%= "#{@user.microposts.count}" %>件</p>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
