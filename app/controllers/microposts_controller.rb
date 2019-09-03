@@ -5,6 +5,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/:id
   def show
     @micropost = current_user.microposts.find(params[:id])
+    @comment = Comment.new
   end
   
   # GET /microposts

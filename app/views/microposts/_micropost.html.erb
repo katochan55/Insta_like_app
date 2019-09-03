@@ -7,7 +7,7 @@
     <span class="user"><%= link_to @micropost.user.user_name, @micropost.user %></span>
   </div>
   <span class="content">
-    <%= image_tag @micropost.picture.url if @micropost.picture? %>
+    <%= link_to( (image_tag @micropost.picture.url if @micropost.picture?), micropost_path(@micropost.id) ) %>
     <%= render 'users/favorite_form' %>
     <%= @micropost.content %>
   </span>
@@ -20,8 +20,6 @@
   </span>
   <span class="comment">
     <%= render "comments/new" %>
-    <% if @comments.any? %>
-      <%= render @comments %>
-    <% end %>
+    <%= render "microposts/feed_comments" %>
   </span>
 </li>

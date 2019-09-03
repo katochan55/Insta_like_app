@@ -17,9 +17,7 @@
       </span>
       <span class="comment">
         <%= render "comments/new" %>
-        <% if @comments.any? %>
-          <%= render @comments %>
-        <% end %>
+        <%= render "microposts/feed_comments" %>
       </span>
     </div>
   </div>
