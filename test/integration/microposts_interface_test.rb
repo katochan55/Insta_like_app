@@ -55,9 +55,20 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
                                       { content: content,
                                         picture: picture } }
     end
+    # show(個別投稿)ページのUI
     assert assigns(:micropost).picture? # 投稿成功後にassignsメソッドでインスタンス変数@micropostにアクセス
     assert_template 'show'
     assert_match content, response.body
+    assert_select 'input[type=submit]'
+    assert_select 'textarea#comment_content'
+    # コメント投稿
+    content_comment = "Hello"
+    post comments_path, params: { micropost_id: assigns(:micropost).id,
+                                  comment: { content: content_comment } }
+    follow_redirect!
+    assert_not flash.empty?
+    assert_match "#{content}", response.body
+    assert_match "#{@user.user_name}", response.body
   end
   
 end
