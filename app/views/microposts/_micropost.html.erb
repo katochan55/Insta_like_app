@@ -7,7 +7,7 @@
     <span class="user"><%= link_to @micropost.user.user_name, @micropost.user %></span>
   </div>
   <span class="content">
-    <%= link_to( (image_tag @micropost.picture.url if @micropost.picture?), micropost_path(@micropost.id) ) %>
+    <%= link_to( (image_tag @micropost.picture.url), micropost_path(@micropost.id) ) if @micropost.picture? %>
     <%= render 'users/favorite_form' %>
     <%= @micropost.content %>
   </span>
