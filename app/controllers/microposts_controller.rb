@@ -15,6 +15,7 @@ class MicropostsController < ApplicationController
   # POST /microposts
   def create
     @micropost = current_user.microposts.build(micropost_params)
+    @comment = Comment.new
     if @micropost.save
       flash.now[:success] = "投稿が完了しました！"
       render 'show'
