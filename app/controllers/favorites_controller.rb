@@ -4,11 +4,13 @@ class FavoritesController < ApplicationController
   # POST /favorites/:micropost_id/create
   def create
     @micropost = Micropost.find(params[:micropost_id])
+    @user = User.find(@micropost.user_id)
     current_user.favorite(@micropost)
     respond_to do |format|
       format.html { redirect_to request.referrer }
       format.js
     end
+    @user.notifications.create(content: "あなたの投稿が#{current_user.full_name}さんにお気に入り登録されました。")
   end
 
   # DELETE /favorites/:micropost_id/destroy

@@ -23,15 +23,17 @@ Rails.application.routes.draw do
   # Micropostsコントローラのルーティング  
   resources :microposts, only: [:show, :new, :create, :destroy]
   
-  # Relationshipリソースのルーティング
+  # Relationshipコントローラのルーティング
   resources :relationships, only: [:create, :destroy]
   
-  # Favoriteリソースのルーティング
+  # Favoriteコントローラのルーティング
   post   "favorites/:micropost_id/create"  => "favorites#create"
   delete "favorites/:micropost_id/destroy" => "favorites#destroy"
   
-  # Commentリソースのルーティング
+  # Commentコントローラのルーティング
   resources :comments, only: :create
-  # post "comments" => "comments#create"
+  
+  # Notificationコントローラのルーティング
+  resources :notifications, only: :index
   
 end

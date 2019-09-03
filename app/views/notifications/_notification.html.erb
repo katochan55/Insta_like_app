@@ -1,0 +1,9 @@
+<li id="notification-<%= notification.id %>">
+  <div>
+      <!--以下のnotification_userではなく、誰の行為によって通知がきたか？が知りたい-->
+    <%  notification_user = User.find(notification.user_id) %>
+    <%= link_to gravatar_for(notification_user, size: 30), notification_user %>
+    <span class="user"><%= link_to notification_user.user_name, notification_user %></span>
+    <%= notification.content %>
+  </div>
+</li>

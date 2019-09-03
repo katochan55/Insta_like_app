@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed # following配列の元はfollowed idの集合である
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :favorites, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   
   attr_accessor :remember_token
   before_save :downcase_email  # 保存する直前にemail属性を小文字に変換してメールアドレスの一意性を保証する
@@ -61,22 +62,6 @@ class User < ApplicationRecord
     Micropost.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
   end
-  
-  # micropost.rb マイクロポストのコメント一覧を返す
-  # def feed_comment
-  #   Comment.where("micropost_id = :micropost_id")
-  # end
-  
-  # # static_pages_controller and micropost_controller
-  # @comments = @micropost.feed_comment
-  
-  # # _micropost.html.erb
-  # <% if @comments.any? %>
-  #   <= render @comments %>
-  # <% end %>
-  
-  # # home.html.erb
-  # <%= render 'comment' %>
   
   # ユーザーをフォローする
   def follow(other_user)
