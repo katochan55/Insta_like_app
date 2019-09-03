@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   
   # GET /users/:id
   def show
+    # 後ほど、横三列の写真表示に変更する
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
   end

@@ -6,6 +6,11 @@ class Micropost < ApplicationRecord
   mount_uploader :picture, PictureUploader
   validate  :picture_size
   has_many :comments, dependent: :destroy
+  
+  # 引数のmicropost_idを持つコメントを集めてくる
+  def feed_comment(micropost_id)
+    Comment.where("micropost_id = ?", micropost_id)
+  end
 
   private
     # アップロードされた画像のサイズをバリデーションする

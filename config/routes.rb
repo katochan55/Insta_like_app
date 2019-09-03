@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   delete "favorites/:micropost_id/destroy" => "favorites#destroy"
   
   # Commentリソースのルーティング
-  resources :comments, only: [:new, :create]
+  resources :comments, only: :create
+  # post "comments" => "comments#create"
   
 end

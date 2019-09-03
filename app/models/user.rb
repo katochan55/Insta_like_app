@@ -62,6 +62,22 @@ class User < ApplicationRecord
                      OR user_id = :user_id", user_id: id)
   end
   
+  # micropost.rb マイクロポストのコメント一覧を返す
+  # def feed_comment
+  #   Comment.where("micropost_id = :micropost_id")
+  # end
+  
+  # # static_pages_controller and micropost_controller
+  # @comments = @micropost.feed_comment
+  
+  # # _micropost.html.erb
+  # <% if @comments.any? %>
+  #   <= render @comments %>
+  # <% end %>
+  
+  # # home.html.erb
+  # <%= render 'comment' %>
+  
   # ユーザーをフォローする
   def follow(other_user)
     following << other_user

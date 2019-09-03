@@ -6,12 +6,6 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     @micropost = microposts(:orange)
     @user      = users(:taro)
   end
-  
-  # コメントをnew(作成)するには、ログインしていることが必要
-  test "new should require logged-in user" do
-    get new_comment_path
-    assert_redirected_to login_url
-  end
 
   # コメントをcreate(登録)するには、ログインしていることが必要
   test "create should require logged-in user" do

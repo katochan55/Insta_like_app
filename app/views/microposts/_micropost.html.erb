@@ -1,4 +1,5 @@
 <% @micropost = micropost %>
+<% @comments  = @micropost.feed_comment(@micropost.id) %>
 <li id="micropost-<%= @micropost.id %>">
   <div class="microuser">
     <%= link_to gravatar_for(@micropost.user, size: 50), @micropost.user %>
@@ -14,6 +15,12 @@
     <% if current_user?(@micropost.user) %>
       <%= link_to "削除", @micropost, method: :delete,
                                        data: { confirm: "本当に削除しますか？" } %>
+    <% end %>
+  </span>
+  <span class="comment">
+    <%= render "comments/new" %>
+    <% if @comments.any? %>
+      <%= render @comments %>
     <% end %>
   </span>
 </li>

@@ -17,7 +17,6 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash.now[:success] = "投稿が完了しました！"
-      # redirect_to root_url
       render 'show'
     else
       render 'new'
