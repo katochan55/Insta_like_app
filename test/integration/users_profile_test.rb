@@ -12,7 +12,11 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     get user_path(@user)
     assert_template 'users/show'
     assert_select 'title', full_title(@user.full_name, @user.user_name)
-    assert_select 'h1', text: @user.user_name
-    assert_select 'h1>img.gravatar'
+    assert_match @user.user_name, response.body
+    assert_select 'img.gravatar'
+    assert edit_user_path(@user)
+    assert logout_path, method: :delete
+    assert_match @user.full_name, response.body
+    assert_match @user.introduction, response.body unless @user.introduction.nil?
   end
 end

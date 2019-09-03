@@ -1,15 +1,25 @@
 <% provide(:title1, @user.full_name) %>
 <% provide(:title2, @user.user_name) %>
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.user_name %>
-</h1>
 
-<%= render 'follow_form' if logged_in? %>
-
-<section class="stats">
-  <%= render 'shared/stats' %>
-</section>
-
-<p><%= link_to "プロフィールを編集", edit_user_path(@user) %></p>
-<p><%= link_to "ログアウト", logout_path, method: :delete %></p>
+<div class="row">
+  <aside class="col-md-4">
+    <%= gravatar_for @user, size: 100 %>
+  </aside>
+  <div class="col-md-8">
+    <section class="user_name_info">
+      <%= @user.user_name %>
+    </section>
+    <%= link_to "プロフィールを編集", edit_user_path(@user) %>
+    <%= link_to "ログアウト", logout_path, method: :delete %>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+    <section class="follow_info">
+      <%= render 'follow_form' if logged_in? %>
+    </section>
+    <section class="full_name_info">
+      <%= @user.full_name %>
+    </section>
+    <%= @user.introduction %>
+  </div>
+</div>

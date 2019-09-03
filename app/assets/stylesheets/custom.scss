@@ -128,7 +128,8 @@ footer {
 
 .stats {
   overflow: auto;
-  margin-top: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
   padding: 0;
   a {
     float: left;
@@ -280,4 +281,17 @@ span.picture {
     margin-right: 10px;
     margin-top: -5px;
   }
+}
+
+/* users/show.html.erb */
+.user_name_info {
+  font-size: 30px;
+}
+
+.follow_info {
+  margin: 10px;
+}
+
+.full_name_info {
+  font-weight: bold;
 }
