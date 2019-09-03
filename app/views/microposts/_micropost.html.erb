@@ -1,5 +1,6 @@
 <% @micropost = micropost %>
 <% @comments  = @micropost.feed_comment(@micropost.id) %>
+
 <li id="micropost-<%= @micropost.id %>">
   <div class="microuser">
     <%= link_to gravatar_for(@micropost.user, size: 50), @micropost.user %>

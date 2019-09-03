@@ -2,12 +2,12 @@
   <%= render 'shared/error_messages', object: f.object %>
   <%= hidden_field_tag :micropost_id, @micropost.id %>
   <div class="row">
-    <aside class="col-md-4">
+    <aside class="col-md-10">
       <div class="field">
         <%= f.text_area :content, placeholder: "コメントを追加..." %>
       </div>
     </aside>
-  <div class="col-md-8">
+  <div class="col-md-2">
     <%= f.submit "投稿する", class: "btn btn-primary" %>
   </div>
 <% end %>

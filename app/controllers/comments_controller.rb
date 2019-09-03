@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     else
       flash[:danger]  = "空のコメントは投稿できません。"
     end
-    redirect_to request.referrer
+    redirect_to request.referrer || root_url
   end
       
 end
