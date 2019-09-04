@@ -11,13 +11,16 @@ class NotificationsIndexTest < ActionDispatch::IntegrationTest
     @other_micropost_2 = microposts(:zone)
   end
   
-  # 通知一覧ページ
+  # 通知一覧ページ（通知のあり・なしが表示されるか、該当する通知一覧が表示されるか）
   test "notifications index page" do
     log_in_as(@user)
     # 通知がcreateされると通知一覧ページに通知文が表示される
     notification = @user.notifications.create(micropost_id: @my_micropost.id,
                                               content: "あなたの投稿が#{@user.full_name}さんにお気に入り登録されました。")
+    get root_path
+    assert_select "li.new_notification"
     get notifications_path
+    assert_select "li.new_notification", count: 0
     assert_match notification.content, response.body
     # 自分の投稿がお気に入り登録されたとき、自分への通知が1増える
     assert_difference '@user.notifications.count', 1 do

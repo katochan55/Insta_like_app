@@ -309,3 +309,8 @@ span.picture {
     margin-top: -5px;
   }
 }
+
+/* 新しい通知があるとき(notification_flag == 1のとき)は赤文字 */
+.navbar-inverse .navbar-nav > li.new_notification > a {
+  color: red;
+}

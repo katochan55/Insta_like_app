@@ -12,6 +12,7 @@ class FavoritesController < ApplicationController
     end
     @user.notifications.create(micropost_id: @micropost.id,
                                content: "あなたの投稿が#{current_user.full_name}さんにお気に入り登録されました。")
+    $NOTIFICATION_FLAG = 1
   end
 
   # DELETE /favorites/:micropost_id/destroy
