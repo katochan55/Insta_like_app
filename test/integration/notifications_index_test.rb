@@ -15,8 +15,8 @@ class NotificationsIndexTest < ActionDispatch::IntegrationTest
   test "notifications index page" do
     log_in_as(@user)
     # 通知がcreateされると通知一覧ページに通知文が表示される
-    notification = @user.notifications.create(micropost_id: @my_micropost.id,
-                                              content: "あなたの投稿が#{@user.full_name}さんにお気に入り登録されました。")
+    notification = @user.notifications.create!(micropost_id: @my_micropost.id,
+                                               content: "あなたの投稿が#{@user.full_name}さんにお気に入り登録されました。")
     get root_path
     assert_select "li.new_notification"
     get notifications_path
