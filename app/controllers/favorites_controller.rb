@@ -10,7 +10,8 @@ class FavoritesController < ApplicationController
       format.html { redirect_to request.referrer }
       format.js
     end
-    @user.notifications.create(content: "あなたの投稿が#{current_user.full_name}さんにお気に入り登録されました。")
+    @user.notifications.create(micropost_id: @micropost.id,
+                               content: "あなたの投稿が#{current_user.full_name}さんにお気に入り登録されました。")
   end
 
   # DELETE /favorites/:micropost_id/destroy

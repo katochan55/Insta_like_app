@@ -3,6 +3,7 @@ class NotificationsController < ApplicationController
   
   # GET /notifications
   def index
+    # current_userに対する通知の集合を取得
     @notifications  = Notification.where("user_id = ?", current_user.id)
   end
 

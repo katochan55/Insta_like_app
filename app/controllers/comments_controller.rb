@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
     @comment = @micropost.comments.build(user_id: current_user.id, content: params[:comment][:content])
     if !@micropost.nil? && @comment.save
       flash[:success] = "コメントを投稿しました！"
-      @user.notifications.create(content: "あなたの投稿に#{current_user.full_name}さんがコメントしました。")
+      @user.notifications.create(micropost_id: @micropost.id,
+                                 content: "あなたの投稿に#{current_user.full_name}さんがコメントしました。")
     else
       flash[:danger]  = "空のコメントは投稿できません。"
     end

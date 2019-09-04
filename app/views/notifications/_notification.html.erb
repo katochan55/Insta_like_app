@@ -1,9 +1,10 @@
 <li id="notification-<%= notification.id %>">
   <div>
-      <!--以下のnotification_userではなく、誰の行為によって通知がきたか？が知りたい-->
-    <%  notification_user = User.find(notification.user_id) %>
-    <%= link_to gravatar_for(notification_user, size: 30), notification_user %>
-    <span class="user"><%= link_to notification_user.user_name, notification_user %></span>
     <%= notification.content %>
+    <br>
+    <% unless (notification.micropost_id.nil? ||
+               (notification_micropost = Micropost.find(notification.micropost_id)).picture.blank?)%>
+        <%= link_to( (image_tag notification_micropost.picture.url, size: 300), micropost_path(notification.micropost_id) ) %>
+    <% end %>
   </div>
 </li>
